@@ -2,6 +2,7 @@ scheme: http
 keycloak-port: 8080
 keycloak-issuer: ${scheme}://localhost:${keycloak-port}/realms/musico-realm
 keycloak-secret: 3jJsESTUGGpveMJ08CfoCqUQNCctiiBP
+
 server:
   ssl:
     enabled: false
@@ -11,9 +12,9 @@ spring:
   cloud:
     gateway:
       default-filters:
-        - TokenRelay
-  lifecycle:
-    timeout-per-shutdown-phase: 30s
+        - TokenRelay=
+        - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials
+        - SaveSession
   security:
     oauth2:
       client:
@@ -31,23 +32,3 @@ spring:
             client-secret: ${keycloak-secret}
             provider: keycloak
             scope: openid,profile,email,offline_access
-
----
-scheme: https
-keycloak-port: 8080
-
-server:
-  ssl:
-    enabled: true
-
-spring:
-  config:
-    activate:
-      on-profile: ssl
-
-authorities-mapping:
-  issuers:
-    - uri: ${keycloak-issuer}
-      claims:
-        - jsonPath: $.realm_access.roles
-        - jsonPath: $.resource_access.*.roles

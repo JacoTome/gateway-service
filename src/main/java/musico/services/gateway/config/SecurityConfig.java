@@ -20,15 +20,6 @@ import org.springframework.security.web.server.SecurityWebFilterChain;
 @AllArgsConstructor
 public class SecurityConfig {
 
-    @Bean
-    public RouteLocator gatewayRoutes(RouteLocatorBuilder builder, TokenRelayGatewayFilterFactory tokenRelay) {
-        return builder.routes()
-                .route(r -> r.path("/test/**")
-                        .filters(f -> f.filter(tokenRelay.apply()))
-                        .uri("lb://USER-SERVICE")
-                )
-                .build();
-    }
 
     @Bean
     public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http) {
