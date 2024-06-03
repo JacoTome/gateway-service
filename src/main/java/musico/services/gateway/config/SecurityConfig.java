@@ -2,9 +2,6 @@ package musico.services.gateway.config;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.cloud.gateway.filter.factory.TokenRelayGatewayFilterFactory;
-import org.springframework.cloud.gateway.route.RouteLocator;
-import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
@@ -27,6 +24,7 @@ public class SecurityConfig {
                 authorizeExchange(
                         exchange -> exchange
                                 .pathMatchers("/eureka/**").permitAll()
+                                .pathMatchers("/audio/**").permitAll()
                                 .anyExchange().authenticated()
                 )
                 .oauth2Login(
@@ -35,8 +33,6 @@ public class SecurityConfig {
                 .logout(
                         Customizer.withDefaults()
                 );
-
-
         return http.build();
     }
 }
