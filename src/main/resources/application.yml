@@ -1,6 +1,6 @@
 scheme: http
 keycloak-port: 8080
-keycloak-issuer: ${scheme}://localhost:${keycloak-port}/realms/musico-realm
+keycloak-issuer: ${scheme}://204.216.223.231:${keycloak-port}/realms/musico-realm
 keycloak-secret: 3jJsESTUGGpveMJ08CfoCqUQNCctiiBP
 
 server:

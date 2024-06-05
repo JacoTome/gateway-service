@@ -25,7 +25,7 @@ public class SecurityConfig {
                         exchange -> exchange
                                 .pathMatchers("/eureka/**").permitAll()
                                 .pathMatchers("/audio/**").permitAll()
-                                .anyExchange().authenticated()
+                                .anyExchange().permitAll()
                 )
                 .oauth2Login(
                         Customizer.withDefaults()
