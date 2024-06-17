@@ -17,7 +17,6 @@ import org.springframework.security.web.server.SecurityWebFilterChain;
 @AllArgsConstructor
 public class SecurityConfig {
 
-
     @Bean
     public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http) {
         http.csrf(ServerHttpSecurity.CsrfSpec::disable).
@@ -25,14 +24,19 @@ public class SecurityConfig {
                         exchange -> exchange
                                 .pathMatchers("/eureka/**").permitAll()
                                 .pathMatchers("/audio/**").permitAll()
+                                //Keycloak endpoints
+                                .pathMatchers("/realms/**").permitAll()
                                 .anyExchange().authenticated()
-                )
-                .oauth2Login(
-                        Customizer.withDefaults()
-                )
-                .logout(
-                        Customizer.withDefaults()
+                ).oauth2ResourceServer(
+                        oauth2 -> oauth2.jwt(Customizer.withDefaults()
+                        )
                 );
+//                .oauth2Login(
+//                        Customizer.withDefaults()
+//                )
+//                .logout(
+//                        Customizer.withDefaults()
+//                );
         return http.build();
     }
 }
