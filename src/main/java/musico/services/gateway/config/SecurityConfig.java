@@ -23,7 +23,6 @@ public class SecurityConfig {
                 authorizeExchange(
                         exchange -> exchange
                                 .pathMatchers("/eureka/**").permitAll()
-                                .pathMatchers("/audio/**").permitAll()
                                 //Keycloak endpoints
                                 .pathMatchers("/realms/**").permitAll()
                                 .anyExchange().authenticated()

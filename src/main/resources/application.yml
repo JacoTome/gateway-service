@@ -7,7 +7,7 @@ keycloak-secret: 3jJsESTUGGpveMJ08CfoCqUQNCctiiBP
 server:
   ssl:
     enabled: false
-  port: 9095
+  port: 8080
 
 spring:
   cloud:
